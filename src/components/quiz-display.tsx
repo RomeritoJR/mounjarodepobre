@@ -11,13 +11,14 @@ import { Progress } from '@/components/ui/progress';
 import { ArrowLeft, ArrowRight, Check, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 
-type Option = string | { text: string; image: string };
+type DetailedOption = { title: string; description: string; };
+type Option = string | { text: string; image: string } | DetailedOption;
 
 type QuizQuestion = Omit<GenerateMounjaroQuizOutput['quiz'][0], 'options'> & {
   description?: string;
   isIntroQuestion?: boolean;
   options: Option[];
-  layout?: 'default' | 'image-grid' | 'image-options';
+  layout?: 'default' | 'image-grid' | 'image-options' | 'detailed';
   headerText?: {
     timer: string;
     title: string;
@@ -38,12 +39,18 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
   const currentQuestion = quizData[currentQuestionIndex];
   const progressValue = ((currentQuestionIndex) / quizData.length) * 100;
 
+  const isDetailedOption = (option: Option): option is DetailedOption => {
+    return typeof option === 'object' && 'title' in option && 'description' in option;
+  }
+
   const getOptionValue = (option: Option) => {
-    return typeof option === 'string' ? option : option.text;
+    if (typeof option === 'string') return option;
+    if (isDetailedOption(option)) return option.title;
+    return option.text;
   };
 
   const getOptionImage = (option: Option) => {
-    return typeof option === 'object' ? option.image : '';
+    return typeof option === 'object' && 'image' in option ? option.image : '';
   }
 
   const handleAnswerSelect = (answer: string) => {
@@ -86,7 +93,7 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
           className="grid grid-cols-1 sm:grid-cols-2 gap-4"
         >
           {currentQuestion.options.map((option, index) => {
-            const opt = typeof option === 'object' ? option : { text: option, image: '' };
+            const opt = typeof option === 'object' && 'text' in option ? option : { text: getOptionValue(option), image: '' };
             const value = opt.text;
             return (
               <Label
@@ -104,6 +111,33 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
           })}
         </RadioGroup>
       );
+    }
+
+    if (currentQuestion.layout === 'detailed') {
+      return (
+        <RadioGroup
+            value={answers[currentQuestionIndex]}
+            onValueChange={handleAnswerSelect}
+            className="space-y-3"
+        >
+            {currentQuestion.options.map((option, index) => {
+              if (!isDetailedOption(option)) return null;
+              const value = getOptionValue(option);
+              return (
+                <Label
+                    key={index}
+                    className="flex items-start gap-3 rounded-md border p-4 hover:bg-accent/50 transition-colors cursor-pointer [&:has([data-state=checked])]:border-primary [&:has([data-state=checked])]:bg-primary/10"
+                >
+                    <RadioGroupItem value={value} id={`q${currentQuestionIndex}-o${index}`} className="mt-1" />
+                    <div>
+                      <p className="font-sans font-semibold">{option.title}</p>
+                      <p className="font-sans text-sm text-muted-foreground">{option.description}</p>
+                    </div>
+                </Label>
+              )
+            })}
+        </RadioGroup>
+      )
     }
 
     if (currentQuestion.layout === 'image-options') {

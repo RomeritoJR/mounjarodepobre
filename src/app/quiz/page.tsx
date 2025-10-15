@@ -75,6 +75,18 @@ async function QuizGenerator() {
         isIntroQuestion: true,
       },
       {
+        question: 'E hoje, o que mais te impede de emagrecer?',
+        options: [
+          { title: '🕐 Falta de tempo', description: 'Rotina agitada. Não tenho muito tempo livre.' },
+          { title: '🍫 Emocional e Autocontrole', description: 'Dificuldade para resistir às tentações alimentares. Compulsão alimentar, vício em doces, fast food.' },
+          { title: '💸 Financeiro', description: 'Encontrar opções saudáveis mais caras do que os alimentos processados.' },
+          { title: '😓 Constância', description: 'Não consigo ter motivação para seguir um plano por muito tempo.' },
+        ],
+        correctAnswer: '🕐 Falta de tempo', // Dummy
+        isIntroQuestion: true,
+        layout: 'detailed'
+      },
+      {
         question: 'O que é o "Mounjaro de Pobre"?',
         options: ['Um remédio caro', 'Uma bebida natural para auxiliar no emagrecimento', 'Um tipo de exercício físico', 'Uma dieta da moda'],
         correctAnswer: 'Uma bebida natural para auxiliar no emagrecimento',
