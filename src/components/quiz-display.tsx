@@ -370,7 +370,7 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
                 <CardDescription className="text-center" dangerouslySetInnerHTML={{ __html: currentQuestion.infoBody }} />
             )}
           </CardHeader>
-          <CardContent className="p-6 text-center space-y-4">
+          <CardContent className="p-0">
              {currentQuestion.videoEmbed && (
               <div className="relative w-full" style={{ paddingBottom: '177.78%' /* 9:16 Aspect Ratio */ }}>
                 <iframe
@@ -386,19 +386,21 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
                 ></iframe>
               </div>
             )}
+          </CardContent>
+        </Card>
+        <div className="px-6 pb-6 text-center">
             {currentQuestion.finalMessage && (
                 <p className="text-center font-semibold mt-4" dangerouslySetInnerHTML={{ __html: currentQuestion.finalMessage}} />
             )}
-          </CardContent>
            {currentQuestion.buttonText && (
-            <CardFooter className="flex justify-center">
+            <div className="mt-4">
                 <Button onClick={handleNext} size="lg" className="w-full text-xl h-14 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg shadow-lg">
                     {currentQuestion.buttonText}
                     <ArrowRight className="ml-2"/>
                 </Button>
-            </CardFooter>
+            </div>
            )}
-        </Card>
+        </div>
       </div>
     )
   }
@@ -801,5 +803,3 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
     </div>
   );
 }
-
-    
