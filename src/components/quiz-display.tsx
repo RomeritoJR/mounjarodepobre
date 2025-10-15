@@ -15,13 +15,6 @@ import { Slider } from './ui/slider';
 import { Tabs, TabsList, TabsTrigger } from './ui/tabs';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
 
-declare global {
-  interface Window {
-    _wq: any[];
-    Wistia: any;
-  }
-}
-
 type DetailedOption = { title: string; description: string; };
 type Option = string | { text: string; image: string } | DetailedOption;
 
@@ -62,27 +55,6 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
   const [unit, setUnit] = useState('cm');
   const router = useRouter();
 
-  useEffect(() => {
-    if (quizData[currentQuestionIndex]?.isFinalStep) {
-      const script = document.createElement('script');
-      script.src = 'https://fast.wistia.net/assets/external/E-v1.js';
-      script.async = true;
-      document.body.appendChild(script);
-
-      return () => {
-        // Cleanup Wistia video
-        if (window.Wistia) {
-            const wistiaVideo = window.Wistia.video("xl5k0fj643");
-            if (wistiaVideo) {
-              wistiaVideo.remove();
-            }
-        }
-        if (document.body.contains(script)) {
-          document.body.removeChild(script);
-        }
-      };
-    }
-  }, [currentQuestionIndex, quizData]);
 
   const currentQuestion = quizData[currentQuestionIndex];
   const progressValue = ((currentQuestionIndex) / quizData.length) * 100;
@@ -395,7 +367,7 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
           </CardHeader>
           <CardContent className="p-6 text-center space-y-4">
             {videoEmbedHtml && (
-              <div dangerouslySetInnerHTML={{ __html: videoEmbedHtml.replace(/<script.*<\/script>/g, '') }} />
+              <div dangerouslySetInnerHTML={{ __html: videoEmbedHtml }} />
             )}
             {currentQuestion.finalMessage && (
                 <p className="text-center font-semibold mt-4" dangerouslySetInnerHTML={{ __html: currentQuestion.finalMessage}} />
