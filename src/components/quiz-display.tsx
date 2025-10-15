@@ -252,6 +252,18 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
             />
         </div>
       )}
+      
+      {currentQuestionIndex === 4 && (
+        <div className="my-4">
+            <Image
+                src="https://i.postimg.cc/cL6JPrPG/Screenshot-18.png"
+                alt="O que te impede de emagrecer"
+                width={600}
+                height={400}
+                className="rounded-lg mx-auto"
+            />
+        </div>
+      )}
 
 
       {renderHeaderText()}
