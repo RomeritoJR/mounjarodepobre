@@ -352,8 +352,6 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
   }
   
   if (currentQuestion.isFinalStep) {
-    const videoEmbedHtml = currentQuestion.videoEmbed;
-      
     return (
       <div className="w-full max-w-2xl space-y-4">
         <Card>
@@ -366,9 +364,6 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
             )}
           </CardHeader>
           <CardContent className="p-6 text-center space-y-4">
-            {videoEmbedHtml && (
-              <div dangerouslySetInnerHTML={{ __html: videoEmbedHtml }} />
-            )}
             {currentQuestion.finalMessage && (
                 <p className="text-center font-semibold mt-4" dangerouslySetInnerHTML={{ __html: currentQuestion.finalMessage}} />
             )}
@@ -697,8 +692,8 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
       {currentQuestionIndex === 2 && (
         <div className="my-4">
             <Image
-                src="https://i.postimg.cc/63FqhwYF/Screenshot-4.png"
-                alt="Áreas do corpo"
+                src="https://i.postimg.cc/VkGcQgnH/Screenshot-15.png"
+                alt="Antes e depois"
                 width={600}
                 height={100}
                 className="rounded-lg mx-auto"
