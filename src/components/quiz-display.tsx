@@ -17,7 +17,7 @@ type QuizQuestion = Omit<GenerateMounjaroQuizOutput['quiz'][0], 'options'> & {
   description?: string;
   isIntroQuestion?: boolean;
   options: Option[];
-  layout?: 'default' | 'image-grid';
+  layout?: 'default' | 'image-grid' | 'image-options';
   headerText?: {
     timer: string;
     title: string;
@@ -42,6 +42,10 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
     return typeof option === 'string' ? option : option.text;
   };
 
+  const getOptionImage = (option: Option) => {
+    return typeof option === 'object' ? option.image : '';
+  }
+
   const handleAnswerSelect = (answer: string) => {
     const newAnswers = [...answers];
     newAnswers[currentQuestionIndex] = answer;
@@ -56,7 +60,7 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
 
   const handleBack = () => {
     if (currentQuestionIndex > 0) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setCurrentQuestionIndex(currentQuestionIndex - 1);
     }
   };
 
@@ -102,6 +106,35 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
       );
     }
 
+    if (currentQuestion.layout === 'image-options') {
+      return (
+        <RadioGroup
+          value={answers[currentQuestionIndex]}
+          onValueChange={handleAnswerSelect}
+          className="space-y-3"
+        >
+          {currentQuestion.options.map((option, index) => {
+            const value = getOptionValue(option);
+            const image = getOptionImage(option);
+            return (
+              <Label
+                key={index}
+                className="flex items-center justify-between gap-3 rounded-md border p-4 hover:bg-accent/50 transition-colors cursor-pointer [&:has([data-state=checked])]:border-primary [&:has([data-state=checked])]:bg-primary/10"
+              >
+                <div className="flex items-center gap-3">
+                  <RadioGroupItem value={value} id={`q${currentQuestionIndex}-o${index}`} />
+                  <span className="font-sans">{value}</span>
+                </div>
+                {image && (
+                  <Image src={image} alt={value} width={80} height={50} className="rounded-md object-contain" />
+                )}
+              </Label>
+            )
+          })}
+        </RadioGroup>
+      )
+    }
+
     return (
         <RadioGroup
             value={answers[currentQuestionIndex]}
@@ -129,15 +162,17 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
         <div className="bg-lime-100 text-green-800 p-2 rounded-lg inline-block">
           <p>{currentQuestion.headerText.timer}</p>
         </div>
-        <h2 className="text-2xl font-bold uppercase" dangerouslySetInnerHTML={{ __html: currentQuestion.headerText.title.replace(/(\d+ a \d+ KG EM \d+ DIAS)/, '<span class="text-yellow-500">\$1</span>') }}></h2>
+        <h2 className="text-2xl font-bold uppercase" dangerouslySetInnerHTML={{ __html: currentQuestion.headerText.title.replace(/(\\d+ a \\d+ KG EM \\d+ DIAS)/, '<span class="text-yellow-500">\$1</span>') }}></h2>
         <p className="text-gray-600">{currentQuestion.headerText.subtitle}</p>
       </div>
     )
   }
 
+  const showProgress = !['image-grid', 'image-options'].includes(currentQuestion.layout || '');
+
   return (
     <div className="w-full max-w-2xl space-y-4">
-       {currentQuestion.layout !== 'image-grid' && (
+       {showProgress && (
         <>
             <div className="flex items-center gap-4">
                 <Progress value={progressValue} className="w-full h-2" />
@@ -145,17 +180,21 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
                     {currentQuestionIndex + 1} / {quizData.length}
                 </p>
             </div>
-            <div className="my-4">
-                <Image
-                    src="https://i.postimg.cc/7h5dMrf9/Screenshot-12.png"
-                    alt="Etapas do Protocolo"
-                    width={600}
-                    height={100}
-                    className="rounded-lg mx-auto"
-                />
-            </div>
         </>
       )}
+
+      {currentQuestion.layout !== 'image-grid' && (
+        <div className="my-4">
+            <Image
+                src="https://i.postimg.cc/7h5dMrf9/Screenshot-12.png"
+                alt="Etapas do Protocolo"
+                width={600}
+                height={100}
+                className="rounded-lg mx-auto"
+            />
+        </div>
+      )}
+
 
       {renderHeaderText()}
 
