@@ -87,9 +87,14 @@ async function QuizGenerator() {
         layout: 'detailed'
       },
       {
-        question: 'O que é o "Mounjaro de Pobre"?',
-        options: ['Um remédio caro', 'Uma bebida natural para auxiliar no emagrecimento', 'Um tipo de exercício físico', 'Uma dieta da moda'],
-        correctAnswer: 'Uma bebida natural para auxiliar no emagrecimento',
+        isInfoStep: true,
+        image: 'https://i.postimg.cc/XJjmDyzS/Screenshot-3.png',
+        infoTitle: 'Você viu a pesquisa recente da Universidade de São Paulo informando a descoberta de um composto natural e uma fruta asiática que ATIVAM a produção dos hormônios do emagrecimento?',
+        infoBody: 'Foi com base nela que desenvolvemos o <strong>Protocolo Truque do Mounjaro</strong>, veja abaixo👇<br /><br />É assim que 2.374 mulheres, neste protocolo, alcançaram resultados incríveis, reativando o metabolismo através de um método inovador que utiliza <strong>ESSA FRUTA ASIÁTICA E O SAL ROSA</strong>',
+        buttonText: 'Continuar',
+        question: '', // Needs to be here to avoid breaking type
+        options: [], // Needs to be here to avoid breaking type
+        correctAnswer: '', // Needs to be here to avoid breaking type
       },
       {
         question: 'Qual destes NÃO é um benefício associado à bebida?',

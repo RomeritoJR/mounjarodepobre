@@ -17,6 +17,11 @@ type Option = string | { text: string; image: string } | DetailedOption;
 type QuizQuestion = Omit<GenerateMounjaroQuizOutput['quiz'][0], 'options'> & {
   description?: string;
   isIntroQuestion?: boolean;
+  isInfoStep?: boolean;
+  image?: string;
+  infoTitle?: string;
+  infoBody?: string;
+  buttonText?: string;
   options: Option[];
   layout?: 'default' | 'image-grid' | 'image-options' | 'detailed';
   headerText?: {
@@ -74,15 +79,49 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
   const handleFinish = () => {
     const correctAnswersCount = quizData.reduce((count, question, index) => {
       // Don't score the intro question if it exists
-      if (question.isIntroQuestion) return count;
+      if (question.isIntroQuestion || question.isInfoStep) return count;
       return answers[index] === question.correctAnswer ? count + 1 : count;
     }, 0);
     
-    // Total is the number of questions minus any intro questions
-    const totalScorableQuestions = quizData.filter(q => !q.isIntroQuestion).length;
+    // Total is the number of questions minus any intro or info questions
+    const totalScorableQuestions = quizData.filter(q => !q.isIntroQuestion && !q.isInfoStep).length;
 
     router.push(`/results?correct=${correctAnswersCount}&total=${totalScorableQuestions}`);
   };
+
+  if (currentQuestion.isInfoStep) {
+    return (
+      <div className="w-full max-w-2xl space-y-4">
+        <Card>
+          <CardContent className="p-6 text-center space-y-4">
+            {currentQuestion.infoTitle && (
+              <h2 className="text-xl font-semibold" dangerouslySetInnerHTML={{ __html: currentQuestion.infoTitle }} />
+            )}
+             {currentQuestion.image && (
+              <div className="my-4">
+                <Image 
+                  src={currentQuestion.image}
+                  alt="Informational Step"
+                  width={600}
+                  height={400}
+                  className="rounded-lg mx-auto"
+                />
+              </div>
+            )}
+            {currentQuestion.infoBody && (
+              <p className="text-muted-foreground" dangerouslySetInnerHTML={{ __html: currentQuestion.infoBody }} />
+            )}
+          </CardContent>
+          <CardFooter className="flex justify-center">
+            <Button onClick={handleNext}>
+              {currentQuestion.buttonText || 'Continuar'}
+              <ArrowRight />
+            </Button>
+          </CardFooter>
+        </Card>
+      </div>
+    )
+  }
 
   const renderOptions = () => {
     if (currentQuestion.layout === 'image-grid') {
