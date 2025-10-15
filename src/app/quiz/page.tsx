@@ -32,34 +32,18 @@ export default function QuizPage() {
   );
 }
 
-const weightLossQuestion = {
-  question: 'Quantos quilos você deseja perder?',
-  description: 'O Protocolo Mounjaro dos Pobres te ajuda a eliminar gordura de forma acelerada.',
-  options: [
-    'Até 5 kg',
-    'De 6 a 10 kg',
-    'De 11 a 15 kg',
-    'De 16 a 20 kg',
-    'Mais de 20 kg',
-  ],
-  correctAnswer: 'Mais de 20 kg', // Dummy answer, this question is not scored
-  isIntroQuestion: true,
-};
-
 async function QuizGenerator() {
   try {
     const { quiz } = await generateMounjaroQuiz({
-      topic: 'Mounjaro de Pobre',
-      numberOfQuestions: 4, // We now generate 4 questions, plus the static one.
+      topic: 'Emagrecimento e perda de peso',
+      numberOfQuestions: 10,
     });
     
     if (!quiz || quiz.length === 0) {
       throw new Error('Failed to generate quiz questions.');
     }
 
-    const fullQuiz = [weightLossQuestion, ...quiz];
-
-    return <QuizDisplay quizData={fullQuiz} />;
+    return <QuizDisplay quizData={quiz} />;
   } catch (error) {
     // console.error(error); // This was causing an error in Next.js
     return (

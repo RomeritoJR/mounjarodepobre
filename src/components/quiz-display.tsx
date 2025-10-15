@@ -47,12 +47,12 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
 
   const handleFinish = () => {
     const correctAnswersCount = quizData.reduce((count, question, index) => {
-      // Don't score the intro question
+      // Don't score the intro question if it exists
       if (question.isIntroQuestion) return count;
       return answers[index] === question.correctAnswer ? count + 1 : count;
     }, 0);
     
-    // Total is the number of questions minus the intro one
+    // Total is the number of questions minus any intro questions
     const totalScorableQuestions = quizData.filter(q => !q.isIntroQuestion).length;
 
     router.push(`/results?correct=${correctAnswersCount}&total=${totalScorableQuestions}`);
