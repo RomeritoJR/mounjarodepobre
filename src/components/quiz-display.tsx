@@ -9,6 +9,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { Progress } from '@/components/ui/progress';
 import { ArrowLeft, ArrowRight, Check } from 'lucide-react';
+import Image from 'next/image';
 
 type QuizQuestion = GenerateMounjaroQuizOutput['quiz'][0] & {
   description?: string;
@@ -65,6 +66,15 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
         <p className="text-sm text-muted-foreground font-medium whitespace-nowrap">
           {currentQuestionIndex + 1} / {quizData.length}
         </p>
+      </div>
+      <div className="my-4">
+          <Image
+              src="https://i.postimg.cc/7h5dMrf9/Screenshot-12.png"
+              alt="Etapas do Protocolo"
+              width={600}
+              height={100}
+              className="rounded-lg mx-auto"
+          />
       </div>
       <Card>
         <CardHeader>
