@@ -14,6 +14,13 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { Slider } from './ui/slider';
 import { Tabs, TabsList, TabsTrigger } from './ui/tabs';
 
+declare global {
+  interface Window {
+    _wq: any[];
+    Wistia: any;
+  }
+}
+
 type DetailedOption = { title: string; description: string; };
 type Option = string | { text: string; image: string } | DetailedOption;
 
@@ -37,7 +44,8 @@ type QuizQuestion = Omit<GenerateMounjaroQuizOutput['quiz'][0], 'options'> & {
     timer: string;
     title: string;
     subtitle: string;
-  }
+  };
+  isOfferPage?: boolean;
 };
 
 
@@ -51,19 +59,35 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
   const [height, setHeight] = useState(170);
   const [weight, setWeight] = useState(70);
   const [unit, setUnit] = useState('cm');
+  const [videoEnded, setVideoEnded] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
-    // Wistia script handling for the final step
     if (quizData[currentQuestionIndex]?.isFinalStep) {
-        const script = document.createElement('script');
-        script.src = 'https://fast.wistia.net/player.js';
-        script.async = true;
-        document.body.appendChild(script);
+      window._wq = window._wq || [];
+      window._wq.push({
+        id: "xl5k0fj643",
+        onReady: (video: any) => {
+          video.bind("end", () => {
+            setVideoEnded(true);
+          });
+        }
+      });
+      const script = document.createElement('script');
+      script.src = 'https://fast.wistia.net/assets/external/E-v1.js';
+      script.async = true;
+      document.body.appendChild(script);
 
-        return () => {
-            document.body.removeChild(script);
-        };
+      return () => {
+        // Cleanup Wistia video
+        const wistiaVideo = window.Wistia?.video("xl5k0fj643");
+        if (wistiaVideo) {
+          wistiaVideo.remove();
+        }
+        if (document.body.contains(script)) {
+          document.body.removeChild(script);
+        }
+      };
     }
   }, [currentQuestionIndex, quizData]);
 
@@ -88,10 +112,6 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
     const newAnswers = [...answers];
     newAnswers[currentQuestionIndex] = answer;
     setAnswers(newAnswers);
-    // Remove auto-advance
-    // if (!currentQuestion.isBmiCalculator && currentQuestionIndex < quizData.length -1) {
-    //     setTimeout(() => handleNext(), 300);
-    // }
   };
 
   const handleNext = () => {
@@ -152,7 +172,14 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
                 <p className="text-center font-semibold mt-4" dangerouslySetInnerHTML={{ __html: currentQuestion.finalMessage}} />
             )}
           </CardContent>
-          {/* No footer on final step */}
+          {videoEnded && (
+             <CardFooter className="flex justify-center">
+                <Button onClick={handleNext} size="lg" className="w-full text-xl h-14 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg shadow-lg">
+                    Avançar
+                    <ArrowRight className="ml-2"/>
+                </Button>
+            </CardFooter>
+          )}
         </Card>
       </div>
     )
@@ -202,9 +229,9 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
             )}
           </CardContent>
           <CardFooter className="flex justify-center">
-            <Button onClick={currentQuestionIndex < quizData.length - 1 ? handleNext : handleFinish}>
+            <Button onClick={currentQuestionIndex < quizData.length - 1 ? handleNext : handleFinish} className={currentQuestion.isOfferPage ? "bg-red-600 hover:bg-red-700 w-full text-xl h-14" : ""}>
               {currentQuestion.buttonText || 'Continuar'}
-              {currentQuestionIndex < quizData.length - 1 ? <ArrowRight /> : <Check /> }
+              {currentQuestionIndex < quizData.length - 1 && !currentQuestion.isOfferPage ? <ArrowRight /> : <Check /> }
             </Button>
           </CardFooter>
         </Card>
