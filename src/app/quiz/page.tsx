@@ -6,7 +6,6 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Suspense } from 'react';
 import QuizLoading from './loading';
-import Image from 'next/image';
 
 export const metadata: Metadata = {
   title: 'Quiz - Mounjaro de Pobre',
@@ -15,15 +14,6 @@ export const metadata: Metadata = {
 export default function QuizPage() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-4 bg-gray-50">
-       <div className="w-full max-w-2xl mx-auto mb-4">
-        <Image
-          src="https://i.postimg.cc/3xYYXWFJ/Screenshot-1.png"
-          alt="Mounjaro dos Pobres Logo"
-          width={200}
-          height={50}
-          className="mx-auto"
-        />
-      </div>
       <Suspense fallback={<QuizLoading />}>
         <QuizGenerator />
       </Suspense>
@@ -34,6 +24,13 @@ export default function QuizPage() {
 async function QuizGenerator() {
   const predefinedQuiz = {
     quiz: [
+      {
+        question: 'Quantos quilos você deseja perder?',
+        description: 'O Protocolo Mounjaro dos Pobres te ajuda a eliminar gordura de forma acelerada.',
+        options: ['Até 5 kg', 'De 6 a 10 kg', 'De 11 a 15 kg', 'De 16 a 20 kg', 'Mais de 20 kg'],
+        correctAnswer: 'Mais de 20 kg', // Dummy correct answer, this question won't be scored
+        isIntroQuestion: true,
+      },
       {
         question: 'O que é o "Mounjaro de Pobre"?',
         options: ['Um remédio caro', 'Uma bebida natural para auxiliar no emagrecimento', 'Um tipo de exercício físico', 'Uma dieta da moda'],
