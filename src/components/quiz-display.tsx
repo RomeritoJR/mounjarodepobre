@@ -10,8 +10,13 @@ import { Label } from '@/components/ui/label';
 import { Progress } from '@/components/ui/progress';
 import { ArrowLeft, ArrowRight, Check } from 'lucide-react';
 
+type QuizQuestion = GenerateMounjaroQuizOutput['quiz'][0] & {
+  description?: string;
+  isIntroQuestion?: boolean;
+};
+
 type QuizDisplayProps = {
-  quizData: GenerateMounjaroQuizOutput['quiz'];
+  quizData: QuizQuestion[];
 };
 
 export default function QuizDisplay({ quizData }: QuizDisplayProps) {
@@ -42,10 +47,15 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
 
   const handleFinish = () => {
     const correctAnswersCount = quizData.reduce((count, question, index) => {
+      // Don't score the intro question
+      if (question.isIntroQuestion) return count;
       return answers[index] === question.correctAnswer ? count + 1 : count;
     }, 0);
+    
+    // Total is the number of questions minus the intro one
+    const totalScorableQuestions = quizData.filter(q => !q.isIntroQuestion).length;
 
-    router.push(`/results?correct=${correctAnswersCount}&total=${quizData.length}`);
+    router.push(`/results?correct=${correctAnswersCount}&total=${totalScorableQuestions}`);
   };
 
   return (
@@ -59,6 +69,9 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
       <Card>
         <CardHeader>
           <CardTitle className="font-headline text-2xl">{currentQuestion.question}</CardTitle>
+          {currentQuestion.description && (
+            <CardDescription>{currentQuestion.description}</CardDescription>
+          )}
         </CardHeader>
         <CardContent>
           <RadioGroup

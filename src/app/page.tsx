@@ -8,11 +8,11 @@ export default function Home() {
       <div className="w-full max-w-md mx-auto">
         <div className="mb-6">
             <Image 
-                src="https://i.postimg.cc/3xYYXWFJ/Screenshot-1.png" 
+                src="https://i.postimg.cc/d1G5Mv1j/logo-mounjaro.png" 
                 alt="Especialista em saúde"
                 width={500}
                 height={100}
-                className="rounded-lg shadow-md"
+                className="rounded-lg"
             />
         </div>
 
