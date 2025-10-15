@@ -327,7 +327,7 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
             <p className="font-bold">Mounjaro de Pobre + Bônus</p>
             <p className="line-through text-muted-foreground">DE R$197 POR APENAS</p>
             <div className="bg-red-500 text-white font-bold py-1 px-3 rounded-full inline-block">90% off</div>
-            <p className="text-5xl font-bold text-primary">R$37,00</p>
+            <p className="text-5xl font-bold text-primary">R$37,00</p>p>
             <p className="text-sm">à vista</p>
             <Button asChild size="lg" className="w-full text-xl h-14 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg shadow-lg">
               <Link href="https://pay.cakto.com.br/364szaw_607952" target="_blank">💰 GARANTIR MINHA VAGA POR R$37</Link>
@@ -360,7 +360,7 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
   
   if (currentQuestion.isFinalStep) {
     return (
-      <div className="w-full max-w-2xl space-y-4">
+      <div className="w-full max-w-2xl">
         <Card>
           <CardHeader>
             {currentQuestion.infoTitle && (
@@ -388,12 +388,12 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
             )}
           </CardContent>
         </Card>
-        <div className="px-6 pb-6 text-center">
+        <div className="px-6 pt-2 pb-6 text-center">
             {currentQuestion.finalMessage && (
-                <p className="text-center font-semibold mt-4" dangerouslySetInnerHTML={{ __html: currentQuestion.finalMessage}} />
+                <p className="text-center font-semibold" dangerouslySetInnerHTML={{ __html: currentQuestion.finalMessage}} />
             )}
            {currentQuestion.buttonText && (
-            <div className="mt-4">
+            <div className="mt-2">
                 <Button onClick={handleNext} size="lg" className="w-full text-xl h-14 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg shadow-lg">
                     {currentQuestion.buttonText}
                     <ArrowRight className="ml-2"/>
