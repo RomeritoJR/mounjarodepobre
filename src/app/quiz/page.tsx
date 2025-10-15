@@ -36,8 +36,8 @@ async function QuizGenerator() {
         options: [
           { text: '18 - 29 anos', image: 'https://i.postimg.cc/s2ZJcfcP/Screenshot-20.png' },
           { text: '29 - 39 anos', image: 'https://i.postimg.cc/s2ZJcfcP/Screenshot-20.png' },
-          { text: '39 - 49 anos', image: 'https://i.postimg.cc/Y0z03gP9/image.png' },
-          { text: '+ 50 anos', image: 'https://i.postimg.cc/Y0z03gP9/image.png' },
+          { text: '39 - 49 anos', image: 'https://i.postimg.cc/L5yfSGDK/Screenshot-21.png' },
+          { text: '+ 50 anos', image: 'https://i.postimg.cc/L5yfSGDK/Screenshot-21.png' },
         ],
         correctAnswer: '+ 50 anos', // Dummy
         isIntroQuestion: true,
