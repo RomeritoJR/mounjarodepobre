@@ -111,6 +111,22 @@ async function QuizGenerator() {
         isIntroQuestion: true, // Treat as intro to not score
       },
       {
+        isInfoStep: true,
+        infoTitle: 'Vou te levar à sua melhor forma física!',
+        infoBody: 'Vou transformar esse sonho em realidade, te dando todas as ferramentas que você precisa para emagrecer, exatamente como no caso dessas minhas alunas 👇',
+        carouselImages: [
+          'https://i.postimg.cc/9Mw8ktYD/Screenshot-5.png',
+          'https://i.postimg.cc/hjQyYb17/Screenshot-6.png',
+          'https://i.postimg.cc/nz9RWYG9/Screenshot-7.png',
+          'https://i.postimg.cc/63FqhwYF/Screenshot-4.png',
+          'https://i.postimg.cc/529PJMmL/Screenshot-2.png',
+        ],
+        buttonText: 'Continuar',
+        question: '',
+        options: [],
+        correctAnswer: '',
+      },
+      {
         question: 'Qual a importância da água na perda de peso?',
         options: ['Não tem importância', 'Ajuda a hidratar e a eliminar toxinas', 'Engorda', 'Só pode ser bebida gelada'],
         correctAnswer: 'Ajuda a hidratar e a eliminar toxinas',

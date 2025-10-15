@@ -10,6 +10,7 @@ import { Label } from '@/components/ui/label';
 import { Progress } from '@/components/ui/progress';
 import { ArrowLeft, ArrowRight, Check, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from './ui/carousel';
 
 type DetailedOption = { title: string; description: string; };
 type Option = string | { text: string; image: string } | DetailedOption;
@@ -22,6 +23,7 @@ type QuizQuestion = Omit<GenerateMounjaroQuizOutput['quiz'][0], 'options'> & {
   infoTitle?: string;
   infoBody?: string;
   buttonText?: string;
+  carouselImages?: string[];
   options: Option[];
   layout?: 'default' | 'image-grid' | 'image-options' | 'detailed';
   headerText?: {
@@ -107,6 +109,25 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
                   className="rounded-lg mx-auto"
                 />
               </div>
+            )}
+             {currentQuestion.carouselImages && (
+              <Carousel className="w-full max-w-xs mx-auto my-4" opts={{ loop: true }}>
+                <CarouselContent>
+                  {currentQuestion.carouselImages.map((src, index) => (
+                    <CarouselItem key={index}>
+                      <Image
+                        src={src}
+                        alt={`Depoimento ${index + 1}`}
+                        width={400}
+                        height={400}
+                        className="rounded-lg object-contain"
+                      />
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious />
+                <CarouselNext />
+              </Carousel>
             )}
             {currentQuestion.infoBody && (
               <p className="text-muted-foreground" dangerouslySetInnerHTML={{ __html: currentQuestion.infoBody }} />
