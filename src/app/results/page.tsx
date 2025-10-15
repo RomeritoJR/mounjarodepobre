@@ -1,4 +1,4 @@
-import { calculateQuizScoreAndAdvise } from '@/ai/flows/calculate-quiz-score-and-advise';
+import { calculateQuizScoreAndAdvise } from '@/app/api/ai/calculate-quiz-score-and-advise';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { AlertCircle } from 'lucide-react';

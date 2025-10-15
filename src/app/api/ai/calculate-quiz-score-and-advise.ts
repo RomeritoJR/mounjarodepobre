@@ -20,7 +20,7 @@ export type CalculateQuizScoreAndAdviseInput = z.infer<
 >;
 
 const CalculateQuizScoreAndAdviseOutputSchema = z.object({
-  score: z.number().describe('The user\'s score as a percentage.'),
+  score: z.number().describe("The user's score as a percentage."),
   advice: z.string().describe('Tailored advice based on the user\'s score.'),
 });
 export type CalculateQuizScoreAndAdviseOutput = z.infer<

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import type { GenerateMounjaroQuizOutput } from '@/ai/flows/generate-mounjaro-quiz';
+import type { GenerateMounjaroQuizOutput } from '@/app/api/ai/generate-mounjaro-quiz';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';

@@ -1,4 +1,4 @@
-import { generateMounjaroQuiz } from '@/ai/flows/generate-mounjaro-quiz';
+import { generateMounjaroQuiz } from '@/app/api/ai/generate-mounjaro-quiz';
 import QuizDisplay from '@/components/quiz-display';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
