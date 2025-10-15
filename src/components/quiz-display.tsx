@@ -588,7 +588,7 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
           onValueChange={(answer) => {
             handleAnswerSelect(answer);
           }}
-          className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+          className="grid grid-cols-2 gap-2"
         >
           {currentQuestion.options.map((option, index) => {
             const opt = typeof option === 'object' && 'text' in option ? option : { text: getOptionValue(option), image: '' };
