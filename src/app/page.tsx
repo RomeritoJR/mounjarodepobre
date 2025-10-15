@@ -8,10 +8,10 @@ export default function Home() {
       <div className="w-full max-w-md mx-auto">
         <div className="mb-6">
             <Image 
-                src="https://i.postimg.cc/3xYYXWFJ/Screenshot-1.png" 
-                alt="Especialista em saúde"
+                src="https://i.postimg.cc/pr1v5pLh/antes-depois.png"
+                alt="Antes e depois"
                 width={500}
-                height={100}
+                height={300}
                 className="rounded-lg"
             />
         </div>
