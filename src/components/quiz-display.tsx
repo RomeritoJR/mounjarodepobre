@@ -101,9 +101,24 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
     router.push(`/results?correct=${correctAnswersCount}&total=${totalScorableQuestions}`);
   };
 
+  const renderHeaderText = () => {
+    if (!currentQuestion.headerText) return null;
+
+    return (
+      <div className="text-center mb-6 space-y-4">
+        <div className="bg-lime-100 text-green-800 p-2 rounded-lg inline-block">
+          <p>{currentQuestion.headerText.timer}</p>
+        </div>
+        <h2 className="text-2xl font-bold uppercase" dangerouslySetInnerHTML={{ __html: currentQuestion.headerText.title.replace(/(\\d+ a \\d+ KG EM \\d+ DIAS)/, '<span class="text-yellow-500">$1</span>') }}></h2>
+        <p className="text-gray-600">{currentQuestion.headerText.subtitle}</p>
+      </div>
+    )
+  }
+
   if (currentQuestion.isInfoStep) {
     return (
       <div className="w-full max-w-2xl space-y-4">
+        {renderHeaderText()}
         <Card>
           <CardContent className="p-6 text-center space-y-4">
             {currentQuestion.infoTitle && (
@@ -164,7 +179,7 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
        <div className="w-full max-w-2xl space-y-4">
          <Card>
            <CardHeader>
-              <CardTitle className="font-headline text-2xl text-center">Aquí está seu perfil</CardTitle>
+              <CardTitle className="font-headline text-2xl text-center">{currentQuestion.question}</CardTitle>
            </CardHeader>
            <CardContent className="text-left space-y-4">
                 <p>Seu IMC é: <strong className="text-primary">{bmi}</strong></p>
@@ -378,20 +393,6 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
                 </Label>
             ))}
         </RadioGroup>
-    )
-  }
-
-  const renderHeaderText = () => {
-    if (!currentQuestion.headerText) return null;
-
-    return (
-      <div className="text-center mb-6 space-y-4">
-        <div className="bg-lime-100 text-green-800 p-2 rounded-lg inline-block">
-          <p>{currentQuestion.headerText.timer}</p>
-        </div>
-        <h2 className="text-2xl font-bold uppercase" dangerouslySetInnerHTML={{ __html: currentQuestion.headerText.title.replace(/(\\d+ a \\d+ KG EM \\d+ DIAS)/, '<span class="text-yellow-500">$1</span>') }}></h2>
-        <p className="text-gray-600">{currentQuestion.headerText.subtitle}</p>
-      </div>
     )
   }
 
