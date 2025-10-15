@@ -133,6 +133,12 @@ async function QuizGenerator() {
         options: [],
         correctAnswer: '',
       },
+       {
+        isBmiResult: true,
+        question: '',
+        options: [],
+        correctAnswer: '',
+      },
       {
         question: 'O que são calorias vazias?',
         options: ['Alimentos sem calorias', 'Alimentos que não engordam', 'Alimentos com muitas calorias e poucos nutrientes', 'Alimentos saudáveis'],
@@ -164,7 +170,7 @@ async function QuizGenerator() {
         correctAnswer: 'Não, é um auxiliar e deve ser combinado com hábitos saudáveis',
       },
       {
-        question: 'Qual é o maior erro que as pessoas cometem ao tentar emagrecer?',
+        question: 'Qual o maior erro que as pessoas cometem ao tentar emagrecer?',
         options: ['Beber muita água', 'Procurar soluções rápidas e milagrosas sem mudar o estilo de vida', 'Comer frutas', 'Dormir 8 horas por noite'],
         correctAnswer: 'Procurar soluções rápidas e milagrosas sem mudar o estilo de vida',
       },

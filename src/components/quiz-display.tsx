@@ -22,6 +22,7 @@ type QuizQuestion = Omit<GenerateMounjaroQuizOutput['quiz'][0], 'options'> & {
   isIntroQuestion?: boolean;
   isInfoStep?: boolean;
   isBmiCalculator?: boolean;
+  isBmiResult?: boolean;
   image?: string;
   infoTitle?: string;
   infoBody?: string;
@@ -91,11 +92,11 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
   const handleFinish = () => {
     const correctAnswersCount = quizData.reduce((count, question, index) => {
       // Don't score the intro, info, or bmi questions
-      if (question.isIntroQuestion || question.isInfoStep || question.isBmiCalculator) return count;
+      if (question.isIntroQuestion || question.isInfoStep || question.isBmiCalculator || question.isBmiResult) return count;
       return answers[index] === question.correctAnswer ? count + 1 : count;
     }, 0);
     
-    const totalScorableQuestions = quizData.filter(q => !q.isIntroQuestion && !q.isInfoStep && !q.isBmiCalculator).length;
+    const totalScorableQuestions = quizData.filter(q => !q.isIntroQuestion && !q.isInfoStep && !q.isBmiCalculator && !q.isBmiResult).length;
 
     router.push(`/results?correct=${correctAnswersCount}&total=${totalScorableQuestions}`);
   };
@@ -151,6 +152,57 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
         </Card>
       </div>
     )
+  }
+
+  if (currentQuestion.isBmiResult) {
+    const heightInMeters = height / 100;
+    const bmi = (weight / (heightInMeters * heightInMeters)).toFixed(2);
+    let bmiMessage = `Parabéns, você está na faixa de peso ideal! 🎉`;
+    // You can add logic here to change the message based on the BMI value.
+    
+    return (
+       <div className="w-full max-w-2xl space-y-4">
+         <Card>
+           <CardHeader>
+              <CardTitle className="font-headline text-2xl text-center">Aquí está seu perfil aaa</CardTitle>
+           </CardHeader>
+           <CardContent className="text-left space-y-4">
+                <p>Seu IMC é: <strong className="text-primary">{bmi}</strong></p>
+                <p>{bmiMessage}</p>
+                <div className="text-sm space-y-2">
+                    <p>Aqui estão alguns benefícios de se manter nesse intervalo de peso:</p>
+                    <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+                        <li>Menor risco de doenças crônicas como diabetes tipo 2, hipertensão e doenças cardíacas.</li>
+                        <li>Melhor controle dos níveis de colesterol e da pressão arterial.</li>
+                        <li>Maior qualidade de vida e uma expectativa de vida mais longa.</li>
+                    </ul>
+                </div>
+                <div className="border-t pt-4 space-y-2 text-sm">
+                    <p>✨ Nosso protocolo alimentar vai te ajudar a manter a sua saúde em dia e ainda melhorar a sua estética corporal!</p>
+                    <p>✔️ Com o Mounjaro de Pobre, o seu corpo acelera a queima de gordura de forma natural.</p>
+                    <p>A combinação ideal de ingredientes pode ativar o seu metabolismo, reduzir a retenção de líquidos e aumentar a sua energia.</p>
+                </div>
+           </CardContent>
+           <CardFooter className="flex justify-between border-t pt-6">
+                <Button variant="outline" onClick={handleBack} disabled={currentQuestionIndex === 0}>
+                    <ArrowLeft />
+                    Anterior
+                </Button>
+                {currentQuestionIndex < quizData.length - 1 ? (
+                    <Button onClick={handleNext}>
+                    Próxima
+                    <ArrowRight />
+                    </Button>
+                ) : (
+                    <Button onClick={handleFinish} className="bg-red-600 hover:bg-red-700">
+                    Finalizar
+                    <Check />
+                    </Button>
+                )}
+            </CardFooter>
+         </Card>
+       </div>
+    );
   }
 
   if (currentQuestion.isBmiCalculator) {
