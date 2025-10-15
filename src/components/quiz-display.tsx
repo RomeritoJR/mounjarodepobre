@@ -162,7 +162,7 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
         <div className="bg-lime-100 text-green-800 p-2 rounded-lg inline-block">
           <p>{currentQuestion.headerText.timer}</p>
         </div>
-        <h2 className="text-2xl font-bold uppercase" dangerouslySetInnerHTML={{ __html: currentQuestion.headerText.title.replace(/(\\d+ a \\d+ KG EM \\d+ DIAS)/, '<span class="text-yellow-500">\$1</span>') }}></h2>
+        <h2 className="text-2xl font-bold uppercase" dangerouslySetInnerHTML={{ __html: currentQuestion.headerText.title.replace(/(\\d+ a \\d+ KG EM \\d+ DIAS)/, '<span class="text-yellow-500">$1</span>') }}></h2>
         <p className="text-gray-600">{currentQuestion.headerText.subtitle}</p>
       </div>
     )
@@ -213,8 +213,8 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
       <Card>
         <CardHeader>
           <CardTitle className="font-headline text-2xl text-center">{currentQuestion.question}</CardTitle>
-          {currentQuestion.description && !currentQuestion.headerText && (
-            <CardDescription>{currentQuestion.description}</CardDescription>
+          {currentQuestion.description && (
+            <CardDescription className="text-center">{currentQuestion.description}</CardDescription>
           )}
         </CardHeader>
         <CardContent>

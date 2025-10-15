@@ -62,6 +62,19 @@ async function QuizGenerator() {
         isIntroQuestion: true,
       },
       {
+        question: 'Realmente você está feliz com sua aparência?',
+        description: 'Seja sincera...',
+        options: [
+            '😢 Não, porque me sinto com sobrepeso e isso abala minha autoestima',
+            '💔 Sim, porém sei que posso melhorar minha saúde',
+            '😞 Não, me olho no espelho e quase não me reconheço',
+            '😭 Não, meu parceiro já não me olha mais com desejo como antes',
+            '📸 Não, até evito tirar fotos porque sinto vergonha',
+        ],
+        correctAnswer: '😢 Não, porque me sinto com sobrepeso e isso abala minha autoestima', // Dummy, won't be scored
+        isIntroQuestion: true,
+      },
+      {
         question: 'O que é o "Mounjaro de Pobre"?',
         options: ['Um remédio caro', 'Uma bebida natural para auxiliar no emagrecimento', 'Um tipo de exercício físico', 'Uma dieta da moda'],
         correctAnswer: 'Uma bebida natural para auxiliar no emagrecimento',
