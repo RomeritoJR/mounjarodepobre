@@ -164,7 +164,7 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
        <div className="w-full max-w-2xl space-y-4">
          <Card>
            <CardHeader>
-              <CardTitle className="font-headline text-2xl text-center">Aquí está seu perfil aaa</CardTitle>
+              <CardTitle className="font-headline text-2xl text-center">Aquí está seu perfil</CardTitle>
            </CardHeader>
            <CardContent className="text-left space-y-4">
                 <p>Seu IMC é: <strong className="text-primary">{bmi}</strong></p>
