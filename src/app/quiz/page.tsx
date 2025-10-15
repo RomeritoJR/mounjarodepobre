@@ -71,7 +71,7 @@ async function QuizGenerator() {
             '😭 Não, meu parceiro já não me olha mais com desejo como antes',
             '📸 Não, até evito tirar fotos porque sinto vergonha',
         ],
-        correctAnswer: '😢 Não, porque me sinto com sobrepeso e isso abala minha autoestima', // Dummy, won't be scored
+        correctAnswer: '😢 Não, because me sinto com sobrepeso e isso abala minha autoestima', // Dummy, won't be scored
         isIntroQuestion: true,
       },
       {
@@ -164,7 +164,7 @@ async function QuizGenerator() {
         isFinalStep: true,
         infoTitle: 'Parabéns! Seu Protocolo Personalizado de emagrecimento com o Mounjaro de Pobre está pronto!',
         infoBody: 'Assista o breve video abaixo para liberar SEU protocolo e entender como funciona👇',
-        videoEmbed: '<div class="wistia_responsive_padding" style="padding:178.33% 0 0 0;position:relative;"><div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;"><div class="wistia_embed wistia_async_xl5k0fj643 seo=true web_component=true" style="height:100%;position:relative;width:100%">&nbsp;</div></div></div>',
+        videoEmbed: '<div class="wistia_responsive_padding" style="padding:178.33% 0 0 0;position:relative;"><div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;"><iframe src="https://fast.wistia.net/embed/iframe/xl5k0fj643?web_component=true&seo=true" title="vsl Video" allow="autoplay; fullscreen" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" width="100%" height="100%"></iframe></div></div>',
         finalMessage: 'Esse protocolo é exclusivo SEU e gerado apenas uma vez, então por favor <strong>NÃO saia da página para não perdê-lo</strong>',
         question: '',
         options: [],
@@ -214,3 +214,5 @@ async function QuizGenerator() {
     );
   }
 }
+
+    

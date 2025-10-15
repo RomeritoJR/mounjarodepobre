@@ -59,20 +59,10 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
   const [height, setHeight] = useState(170);
   const [weight, setWeight] = useState(70);
   const [unit, setUnit] = useState('cm');
-  const [videoEnded, setVideoEnded] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
     if (quizData[currentQuestionIndex]?.isFinalStep) {
-      window._wq = window._wq || [];
-      window._wq.push({
-        id: "xl5k0fj643",
-        onReady: (video: any) => {
-          video.bind("end", () => {
-            setVideoEnded(true);
-          });
-        }
-      });
       const script = document.createElement('script');
       script.src = 'https://fast.wistia.net/assets/external/E-v1.js';
       script.async = true;
@@ -80,9 +70,11 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
 
       return () => {
         // Cleanup Wistia video
-        const wistiaVideo = window.Wistia?.video("xl5k0fj643");
-        if (wistiaVideo) {
-          wistiaVideo.remove();
+        if (window.Wistia) {
+            const wistiaVideo = window.Wistia.video("xl5k0fj643");
+            if (wistiaVideo) {
+              wistiaVideo.remove();
+            }
         }
         if (document.body.contains(script)) {
           document.body.removeChild(script);
@@ -153,6 +145,11 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
   }
   
   if (currentQuestion.isFinalStep) {
+    const videoEmbedHtml = currentQuestion.videoEmbed?.replace(
+        '<iframe src="https://fast.wistia.net/embed/iframe/xl5k0fj643?web_component=true&seo=true"',
+        '<div class="wistia_embed wistia_async_xl5k0fj643 seo=true web_component=true" style="height:100%;position:relative;width:100%">&nbsp;</div>'
+      ).replace('</iframe>', '');
+      
     return (
       <div className="w-full max-w-2xl space-y-4">
         <Card>
@@ -165,21 +162,19 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
             )}
           </CardHeader>
           <CardContent className="p-6 text-center space-y-4">
-            {currentQuestion.videoEmbed && (
-              <div dangerouslySetInnerHTML={{ __html: currentQuestion.videoEmbed }} />
+            {videoEmbedHtml && (
+              <div dangerouslySetInnerHTML={{ __html: videoEmbedHtml }} />
             )}
             {currentQuestion.finalMessage && (
                 <p className="text-center font-semibold mt-4" dangerouslySetInnerHTML={{ __html: currentQuestion.finalMessage}} />
             )}
           </CardContent>
-          {videoEnded && (
-             <CardFooter className="flex justify-center">
-                <Button onClick={handleNext} size="lg" className="w-full text-xl h-14 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg shadow-lg">
-                    Avançar
-                    <ArrowRight className="ml-2"/>
-                </Button>
-            </CardFooter>
-          )}
+           <CardFooter className="flex justify-center">
+              <Button onClick={handleNext} size="lg" className="w-full text-xl h-14 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg shadow-lg">
+                  Avançar
+                  <ArrowRight className="ml-2"/>
+              </Button>
+          </CardFooter>
         </Card>
       </div>
     )
@@ -249,7 +244,7 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
        <div className="w-full max-w-2xl space-y-4">
          <Card>
            <CardHeader>
-              <CardTitle className="font-headline text-2xl text-center">{currentQuestion.question}</CardTitle>
+              <CardTitle className="font-headline text-2xl text-center">Aqui está seu perfil</CardTitle>
            </CardHeader>
            <CardContent className="text-left space-y-4">
                 <p>Seu IMC é: <strong className="text-primary">{bmi}</strong></p>
@@ -575,3 +570,5 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
     </div>
   );
 }
+
+    
