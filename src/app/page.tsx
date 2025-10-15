@@ -7,16 +7,16 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-4">
-      <div className="w-full max-w-lg mb-4">
+      <div className="w-full max-w-sm mb-4">
         <Image
           src="https://i.postimg.cc/3xYYXWFJ/Screenshot-1.png"
           alt="Mounjaro de Pobre"
           width={640}
           height={335}
-          className="rounded-lg shadow-lg"
+          className="rounded-lg shadow-lg w-full h-auto"
         />
       </div>
-      <Card className="w-full max-w-lg shadow-lg">
+      <Card className="w-full max-w-sm shadow-lg">
         <CardHeader className="items-center text-center">
           <div className="bg-primary/10 p-3 rounded-full w-fit">
             <GlassWater className="w-12 h-12 text-primary" />
