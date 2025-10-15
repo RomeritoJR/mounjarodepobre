@@ -2,7 +2,7 @@
 
 /**
  * @fileOverview Generates a multiple-choice quiz about Mounjaro de Pobre ingredients and benefits.
- *
+ * 
  * - generateMounjaroQuiz - A function that generates the quiz.
  * - GenerateMounjaroQuizInput - The input type for the generateMounjaroQuiz function.
  * - GenerateMounjaroQuizOutput - The return type for the generateMounjaroQuiz function.
@@ -38,20 +38,20 @@ const generateMounjaroQuizPrompt = ai.definePrompt({
   output: {schema: GenerateMounjaroQuizOutputSchema},
   prompt: `You are an expert in creating quizzes. Create a multiple-choice quiz about {{topic}} with {{numberOfQuestions}} questions.
 
-The output should be a JSON object with a "quiz" field. Each question in the quiz should have a "question" field, an "options" field with possible answers, and a "correctAnswer" field with the correct answer.
+The output should be a JSON object with a \"quiz\" field. Each question in the quiz should have a \"question\" field, an \"options\" field with possible answers, and a \"correctAnswer\" field with the correct answer.
 
 Example:
 {
-  "quiz": [
+  \"quiz\": [
     {
-      "question": "What is Mounjaro de Pobre?",
-      "options": ["A type of exercise", "A healthy drink", "A type of diet", "A medicine"],
-      "correctAnswer": "A healthy drink"
+      \"question\": \"What is Mounjaro de Pobre?\",
+      \"options\": [\"A type of exercise\", \"A healthy drink\", \"A type of diet\", \"A medicine\"]
+      \"correctAnswer\": \"A healthy drink\"
     },
    {
-      "question": "What are the benefits of Mounjaro de Pobre?",
-      "options": ["Weight loss", "Muscle gain", "Improved energy levels", "All of the above"],
-      "correctAnswer": "All of the above"
+      \"question\": \"What are the benefits of Mounjaro de Pobre?\",
+      \"options\": [\"Weight loss\", \"Muscle gain\", \"Improved energy levels\", \"All of the above\"]
+      \"correctAnswer\": \"All of the above\"
     }
   ]
 }`,

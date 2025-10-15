@@ -1,4 +1,4 @@
-import { calculateAndInterpretScore } from '@/ai/flows/calculate-and-interpret-score';
+import { calculateQuizScoreAndAdvise } from '@/ai/flows/calculate-quiz-score-and-advise';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { AlertCircle } from 'lucide-react';
@@ -54,7 +54,7 @@ export default function ResultsPage({ searchParams }: ResultsPageProps) {
 
 async function ScoreInterpreter({ correct, total }: { correct: number; total: number }) {
   try {
-    const { score, advice } = await calculateAndInterpretScore({
+    const { score, advice } = await calculateQuizScoreAndAdvise({
       correctAnswers: correct,
       totalQuestions: total,
     });

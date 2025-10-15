@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Stethoscope } from "lucide-react";
+import { GlassWater } from "lucide-react";
 import Link from "next/link";
 
 export default function Home() {
@@ -9,7 +9,7 @@ export default function Home() {
       <Card className="w-full max-w-lg shadow-lg">
         <CardHeader className="items-center text-center">
           <div className="bg-primary/10 p-3 rounded-full w-fit">
-            <Stethoscope className="w-12 h-12 text-primary" />
+            <GlassWater className="w-12 h-12 text-primary" />
           </div>
           <CardTitle className="text-3xl font-headline mt-4">Mounjaro de Pobre Quiz</CardTitle>
           <CardDescription>Teste seus conhecimentos sobre esta bebida saudável!</CardDescription>
