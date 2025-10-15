@@ -97,9 +97,18 @@ async function QuizGenerator() {
         correctAnswer: '', // Needs to be here to avoid breaking type
       },
       {
-        question: 'Qual destes NÃO é um benefício associado à bebida?',
-        options: ['Acelerar o metabolismo', 'Aumentar a massa muscular instantaneamente', 'Reduzir o inchaço', 'Promover a saciedade'],
-        correctAnswer: 'Aumentar a massa muscular instantaneamente',
+        question: 'Quais destes benefícios você gostaria de ter?',
+        description: '👉 Vamos personalizar sua fórmula para maximizar seu resultado',
+        options: [
+            '🪞 Olhar no espelho e sentir bem comigo mesma, confiante',
+            '⚡ Ter energia para viver o dia sem se arrastar',
+            '👗 Poder colocar um vestido/blusa e não marcar a barriga',
+            '🗣 Receber elogios das pessoas ao meu redor, perguntando o que fiz pra emagrecer',
+            '🔥 Ver meu parceiro me olhando com desejo',
+            '🦵 Poder fazer coisas simples como correr, agachar, viajar com conforto…',
+        ],
+        correctAnswer: '🪞 Olhar no espelho e sentir bem comigo mesma, confiante', // Dummy answer
+        isIntroQuestion: true, // Treat as intro to not score
       },
       {
         question: 'Qual a importância da água na perda de peso?',

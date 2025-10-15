@@ -303,6 +303,18 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
             />
         </div>
       )}
+      
+      {currentQuestionIndex === 6 && (
+        <div className="my-4">
+            <Image
+                src="https://i.postimg.cc/Jn0Kk3Fz/Screenshot-8.png"
+                alt="Benefícios"
+                width={600}
+                height={400}
+                className="rounded-lg mx-auto"
+            />
+        </div>
+      )}
 
 
       {renderHeaderText()}
