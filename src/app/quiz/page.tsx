@@ -34,8 +34,8 @@ async function QuizGenerator() {
       {
         question: 'SELECIONA SUA IDADE PARA CONTINUAR👇',
         options: [
-          { text: '18 - 29 anos', image: 'https://i.postimg.cc/T1G1hN2w/image.png' },
-          { text: '29 - 39 anos', image: 'https://i.postimg.cc/k49g2Gg2/image.png' },
+          { text: '18 - 29 anos', image: 'https://i.postimg.cc/s2ZJcfcP/Screenshot-20.png' },
+          { text: '29 - 39 anos', image: 'https://i.postimg.cc/s2ZJcfcP/Screenshot-20.png' },
           { text: '39 - 49 anos', image: 'https://i.postimg.cc/Y0z03gP9/image.png' },
           { text: '+ 50 anos', image: 'https://i.postimg.cc/Y0z03gP9/image.png' },
         ],
