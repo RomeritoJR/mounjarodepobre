@@ -183,7 +183,7 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
         </>
       )}
 
-      {currentQuestion.layout !== 'image-grid' && (
+      {currentQuestionIndex === 0 && (
         <div className="my-4">
             <Image
                 src="https://i.postimg.cc/7h5dMrf9/Screenshot-12.png"
