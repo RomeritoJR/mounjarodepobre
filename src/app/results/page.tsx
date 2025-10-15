@@ -60,9 +60,18 @@ async function ScoreInterpreter({ correct, total }: { correct: number; total: nu
     });
     return <ResultsDisplay score={score} advice={advice} correct={correct} total={total} />;
   } catch (error) {
-     console.error(error);
+     // console.error(error); // This is commented out to avoid showing the Next.js error overlay.
      const score = (correct / total) * 100;
-     const advice = "Não foi possível carregar o conselho personalizado, mas ótimo trabalho em completar o quiz! Continue aprendendo.";
+     let advice = "Não foi possível carregar o conselho personalizado, mas ótimo trabalho em completar o quiz! Continue aprendendo.";
+
+     if (score >= 80) {
+        advice = "Parabéns! Você tem um ótimo conhecimento sobre o assunto. Continue assim e explore dicas avançadas para otimizar ainda mais seus resultados.";
+     } else if (score >= 50) {
+        advice = "Você está no caminho certo! Continue estudando os materiais para aprimorar seus conhecimentos e melhorar seus resultados.";
+     } else {
+        advice = "Não desanime! Reveja os conceitos básicos e tente novamente. A jornada para uma vida mais saudável é um processo contínuo de aprendizado.";
+     }
+     
      return <ResultsDisplay score={score} advice={advice} correct={correct} total={total} />;
   }
 }
