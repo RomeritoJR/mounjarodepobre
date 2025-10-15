@@ -206,6 +206,18 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
             />
         </div>
       )}
+      
+      {currentQuestionIndex === 3 && (
+        <div className="my-4">
+            <Image
+                src="https://i.postimg.cc/VvMqqKBV/img12.jpg"
+                alt="Mulher feliz"
+                width={600}
+                height={400}
+                className="rounded-lg mx-auto"
+            />
+        </div>
+      )}
 
 
       {renderHeaderText()}
