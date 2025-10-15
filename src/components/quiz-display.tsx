@@ -370,7 +370,7 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
                   src={currentQuestion.videoEmbed}
                   title="vsl video"
                   allow="autoplay; fullscreen"
-                  allowTransparency={true}
+                  allowtransparency="true"
                   frameBorder="0"
                   scrolling="no"
                   className="w-full h-full"
