@@ -18,7 +18,7 @@ export default function QuizPage() {
     <main className="flex min-h-screen flex-col items-center justify-center p-4 bg-gray-50">
        <div className="w-full max-w-2xl mx-auto mb-4">
         <Image
-          src="https://i.postimg.cc/d1G5Mv1j/logo-mounjaro.png"
+          src="https://i.postimg.cc/3xYYXWFJ/Screenshot-1.png"
           alt="Mounjaro dos Pobres Logo"
           width={200}
           height={50}
