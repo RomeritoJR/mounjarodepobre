@@ -51,16 +51,15 @@ async function QuizGenerator() {
       {
         question: 'Em que área do seu corpo você gostaria de reduzir mais gordura?',
         options: [
-          { text: 'Região dos Culotes', image: 'https://i.postimg.cc/d1wZ3b3g/culotes.png' },
-          { text: 'Região das Coxas', image: 'https://i.postimg.cc/D0CgNfYs/coxas.png' },
-          { text: 'Região do Abdomen', image: 'https://i.postimg.cc/W3hT0jFw/abdomen.png' },
-          { text: 'Região dos Glúteos', image: 'https://i.postimg.cc/sXvW7NfD/gluteos.png' },
-          { text: 'Região dos Braços', image: 'https://i.postimg.cc/k4GzLqgN/bracos.png' },
-          { text: 'Todo o Corpo', image: '' },
+          'Região dos Culotes',
+          'Região das Coxas',
+          'Região do Abdomen',
+          'Região dos Glúteos',
+          'Região dos Braços',
+          'Todo o Corpo',
         ],
         correctAnswer: 'Todo o Corpo', // Dummy
         isIntroQuestion: true,
-        layout: 'image-options',
       },
       {
         question: 'O que é o "Mounjaro de Pobre"?',
