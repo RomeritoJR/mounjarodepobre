@@ -14,6 +14,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { Slider } from './ui/slider';
 import { Tabs, TabsList, TabsTrigger } from './ui/tabs';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
+import Link from 'next/link';
 
 type DetailedOption = { title: string; description: string; };
 type Option = string | { text: string; image: string } | DetailedOption;
@@ -259,7 +260,9 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
                 <p className="text-primary font-bold text-base mt-2">• Mounjaro de Pobre (COMPLETO): <span className="float-right">R$ 37,00</span></p>
             </div>
             
-            <Button size="lg" className="w-full text-xl h-14 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg shadow-lg">QUERO COMEÇAR HOJE!</Button>
+            <Button asChild size="lg" className="w-full text-xl h-14 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg shadow-lg">
+              <Link href="https://pay.cakto.com.br/364szaw_607952" target="_blank">QUERO COMEÇAR HOJE!</Link>
+            </Button>
             <p className="text-center text-xs text-gray-500">✅ Pagamento único • Sem mensalidades • Garantia de 30 dias</p>
             <p className="text-center text-xs text-red-600 font-bold">✅ Se você não perder pelo menos 5 kg, devolvemos 100% do seu dinheiro</p>
             <p className="text-center text-sm text-gray-600">Resgate AGORA seu desconto: <span className="font-bold">00:00</span></p>
@@ -286,7 +289,9 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
             <p className="text-center">E nós temos muito orgulho de ter acompanhado essa jornada de perto. 🙏</p>
             <p className="text-center font-bold">Talvez o que está faltando para você começar é saber que é possível.</p>
             <p className="text-center">E sim, com o acompanhamento certo, você também pode emagrecer e se sentir saudável</p>
-            <Button size="lg" className="w-full text-xl h-14 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg shadow-lg">QUERO COMEÇAR!</Button>
+            <Button asChild size="lg" className="w-full text-xl h-14 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg shadow-lg">
+              <Link href="https://pay.cakto.com.br/364szaw_607952" target="_blank">QUERO COMEÇAR!</Link>
+            </Button>
             <Image src="https://media.inlead.cloud/uploads/34056/2025-08-13/md-fpRm3-depoimentos-talla-38-331-x-73-px-221-x-63-px-221-x-63-px-2.png" alt="Depoimentos" width={800} height={100} className="mx-auto rounded-lg"/>
         </section>
         
@@ -324,7 +329,9 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
             <div className="bg-red-500 text-white font-bold py-1 px-3 rounded-full inline-block">90% off</div>
             <p className="text-5xl font-bold text-primary">R$37,00</p>
             <p className="text-sm">à vista</p>
-            <Button size="lg" className="w-full text-xl h-14 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg shadow-lg">💰 GARANTIR MINHA VAGA POR R$37</Button>
+            <Button asChild size="lg" className="w-full text-xl h-14 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg shadow-lg">
+              <Link href="https://pay.cakto.com.br/364szaw_607952" target="_blank">💰 GARANTIR MINHA VAGA POR R$37</Link>
+            </Button>
             <p className="text-xs text-gray-500">Pagamento único • Sem mensalidades • Garantia de 30 dias</p>
             <p className="font-bold mt-4">Se você não emagrecer pelo menos 5kg em 30 dias...</p>
             <p className="font-bold">Eu vou te devolver cada centavo que você pagou, sem fazer perguntas!</p>
@@ -578,7 +585,9 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
       return (
         <RadioGroup
           value={answers[currentQuestionIndex]}
-          onValueChange={handleAnswerSelect}
+          onValueChange={(answer) => {
+            handleAnswerSelect(answer);
+          }}
           className="grid grid-cols-1 sm:grid-cols-2 gap-4"
         >
           {currentQuestion.options.map((option, index) => {
@@ -606,7 +615,9 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
       return (
         <RadioGroup
             value={answers[currentQuestionIndex]}
-            onValueChange={handleAnswerSelect}
+            onValueChange={(answer) => {
+                handleAnswerSelect(answer);
+            }}
             className="space-y-3"
         >
             {currentQuestion.options.map((option, index) => {
@@ -633,7 +644,9 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
       return (
         <RadioGroup
           value={answers[currentQuestionIndex]}
-          onValueChange={handleAnswerSelect}
+          onValueChange={(answer) => {
+            handleAnswerSelect(answer);
+          }}
           className="space-y-3"
         >
           {currentQuestion.options.map((option, index) => {
@@ -661,7 +674,9 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
     return (
         <RadioGroup
             value={answers[currentQuestionIndex]}
-            onValueChange={handleAnswerSelect}
+            onValueChange={(answer) => {
+                handleAnswerSelect(answer);
+            }}
             className="space-y-3"
         >
             {currentQuestion.options.map((option, index) => (
@@ -786,3 +801,5 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
     </div>
   );
 }
+
+    
