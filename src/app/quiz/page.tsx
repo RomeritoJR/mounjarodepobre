@@ -97,7 +97,7 @@ async function QuizGenerator() {
         correctAnswer: '', // Needs to be here to avoid breaking type
       },
       {
-        question: 'Quais destes benefícios você gostaria de ter?',
+        question: 'Quais destas benefícios você gostaria de ter?',
         description: '👉 Vamos personalizar sua fórmula para maximizar seu resultado',
         options: [
             '🪞 Olhar no espelho e sentir bem comigo mesma, confiante',
@@ -164,7 +164,7 @@ async function QuizGenerator() {
         isFinalStep: true,
         infoTitle: 'Parabéns! Seu Protocolo Personalizado de emagrecimento com o Mounjaro de Pobre está pronto!',
         infoBody: 'Assista o breve video abaixo para liberar SEU protocolo e entender como funciona👇',
-        videoEmbed: '',
+        videoEmbed: 'https://scripts.converteai.net/c9c82e7f-e9c5-4f02-9f0b-b93b0c4d1429/players/68d21058cb9a4bf4b8998530/v4/embed.html?fbclid=IwY2xjawNb6rRleHRuA2FlbQIxMABicmlkETFBRGU3TWRqckVmeHA5SWlKAR6CyiXfMufL2HF13ygSL394167C8Z7cVZMs-s5oMREyxEXnmHW300WiJUz9rQ_aem_QDvfSw6r9hmIWsx4e4466g&vl=https%3A%2F%2Fprotocolode21dias.site%2F%3Ffbclid%3DIwY2xjawNb6rRleHRuA2FlbQIxMABicmlkETFBRGU3TWRqckVmeHA5SWlKAR6CyiXfMufL2HF13ygSL394167C8Z7cVZMs-s5oMREyxEXnmHW300WiJUz9rQ_aem_QDvfSw6r9hmIWsx4e4466g',
         finalMessage: 'Esse protocolo é exclusivo SEU e gerado apenas uma vez, então por favor <strong>NÃO saia da página para não perdê-lo</strong>',
         buttonText: "Avançar",
         question: '',

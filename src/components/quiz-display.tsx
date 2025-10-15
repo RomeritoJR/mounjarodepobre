@@ -364,6 +364,21 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
             )}
           </CardHeader>
           <CardContent className="p-6 text-center space-y-4">
+             {currentQuestion.videoEmbed && (
+              <div className="aspect-video">
+                <iframe
+                  src={currentQuestion.videoEmbed}
+                  title="vsl video"
+                  allow="autoplay; fullscreen"
+                  allowTransparency={true}
+                  frameBorder="0"
+                  scrolling="no"
+                  className="w-full h-full"
+                  width="100%"
+                  height="100%"
+                ></iframe>
+              </div>
+            )}
             {currentQuestion.finalMessage && (
                 <p className="text-center font-semibold mt-4" dangerouslySetInnerHTML={{ __html: currentQuestion.finalMessage}} />
             )}
