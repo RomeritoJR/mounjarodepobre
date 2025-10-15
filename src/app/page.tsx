@@ -26,7 +26,7 @@ export default function Home() {
         </CardHeader>
         <CardContent>
           <p className="text-center text-muted-foreground">
-            Descubra os ingredientes, benefícios e modo de preparo do Mounjaro de Pobre com este quiz divertido e informativo. Pronto para começar?
+          Você está a 2 minutos de descobrir por que o seu corpo se recusa a emagrecer e como usar o Mounjaro de Pobre que queima gordura 24 horas por dia (sem academia e sem dietas malucas).
           </p>
         </CardContent>
         <CardFooter className="flex justify-center">
