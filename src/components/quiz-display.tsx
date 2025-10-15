@@ -88,10 +88,10 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
     const newAnswers = [...answers];
     newAnswers[currentQuestionIndex] = answer;
     setAnswers(newAnswers);
-    // Automatically move to the next question if it's not a BMI calculator
-    if (!currentQuestion.isBmiCalculator && currentQuestionIndex < quizData.length -1) {
-        setTimeout(() => handleNext(), 300);
-    }
+    // Remove auto-advance
+    // if (!currentQuestion.isBmiCalculator && currentQuestionIndex < quizData.length -1) {
+    //     setTimeout(() => handleNext(), 300);
+    // }
   };
 
   const handleNext = () => {
