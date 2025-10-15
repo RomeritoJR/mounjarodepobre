@@ -127,9 +127,11 @@ async function QuizGenerator() {
         correctAnswer: '',
       },
       {
-        question: 'Qual a importância da água na perda de peso?',
-        options: ['Não tem importância', 'Ajuda a hidratar e a eliminar toxinas', 'Engorda', 'Só pode ser bebida gelada'],
-        correctAnswer: 'Ajuda a hidratar e a eliminar toxinas',
+        isBmiCalculator: true,
+        question: 'Calculando seu IMC',
+        description: 'O IMC (índice de massa corporal) é um indicador para saber se uma pessoa tem um peso saudável em relação à sua altura.',
+        options: [],
+        correctAnswer: '',
       },
       {
         question: 'O que são calorias vazias?',

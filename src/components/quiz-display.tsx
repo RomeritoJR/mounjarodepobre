@@ -11,6 +11,8 @@ import { Progress } from '@/components/ui/progress';
 import { ArrowLeft, ArrowRight, Check, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from './ui/carousel';
+import { Slider } from './ui/slider';
+import { Tabs, TabsList, TabsTrigger } from './ui/tabs';
 
 type DetailedOption = { title: string; description: string; };
 type Option = string | { text: string; image: string } | DetailedOption;
@@ -19,6 +21,7 @@ type QuizQuestion = Omit<GenerateMounjaroQuizOutput['quiz'][0], 'options'> & {
   description?: string;
   isIntroQuestion?: boolean;
   isInfoStep?: boolean;
+  isBmiCalculator?: boolean;
   image?: string;
   infoTitle?: string;
   infoBody?: string;
@@ -41,6 +44,9 @@ type QuizDisplayProps = {
 export default function QuizDisplay({ quizData }: QuizDisplayProps) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<string[]>(Array(quizData.length).fill(''));
+  const [height, setHeight] = useState(170);
+  const [weight, setWeight] = useState(70);
+  const [unit, setUnit] = useState('cm');
   const router = useRouter();
 
   const currentQuestion = quizData[currentQuestionIndex];
@@ -64,6 +70,10 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
     const newAnswers = [...answers];
     newAnswers[currentQuestionIndex] = answer;
     setAnswers(newAnswers);
+    // Automatically move to the next question if it's not a BMI calculator
+    if (!currentQuestion.isBmiCalculator && currentQuestionIndex < quizData.length -1) {
+        setTimeout(() => handleNext(), 300);
+    }
   };
 
   const handleNext = () => {
@@ -80,13 +90,12 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
 
   const handleFinish = () => {
     const correctAnswersCount = quizData.reduce((count, question, index) => {
-      // Don't score the intro question if it exists
-      if (question.isIntroQuestion || question.isInfoStep) return count;
+      // Don't score the intro, info, or bmi questions
+      if (question.isIntroQuestion || question.isInfoStep || question.isBmiCalculator) return count;
       return answers[index] === question.correctAnswer ? count + 1 : count;
     }, 0);
     
-    // Total is the number of questions minus any intro or info questions
-    const totalScorableQuestions = quizData.filter(q => !q.isIntroQuestion && !q.isInfoStep).length;
+    const totalScorableQuestions = quizData.filter(q => !q.isIntroQuestion && !q.isInfoStep && !q.isBmiCalculator).length;
 
     router.push(`/results?correct=${correctAnswersCount}&total=${totalScorableQuestions}`);
   };
@@ -143,6 +152,78 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
       </div>
     )
   }
+
+  if (currentQuestion.isBmiCalculator) {
+    return (
+       <div className="w-full max-w-2xl space-y-4">
+        <Card>
+           <CardHeader>
+             <CardTitle className="font-headline text-2xl text-center">{currentQuestion.question}</CardTitle>
+              {currentQuestion.description && (
+               <CardDescription className="text-center">{currentQuestion.description}</CardDescription>
+             )}
+           </CardHeader>
+           <CardContent className="space-y-6">
+             <div className="space-y-4">
+               <Label htmlFor="height">Qual é sua altura em cm?</Label>
+                <div className="flex items-center gap-4">
+                    <Tabs defaultValue="cm" onValueChange={setUnit} className="w-[100px]">
+                        <TabsList className="grid w-full grid-cols-2">
+                            <TabsTrigger value="cm">cm</TabsTrigger>
+                            <TabsTrigger value="pol">pol</TabsTrigger>
+                        </TabsList>
+                    </Tabs>
+                    <p className="text-2xl font-bold text-center bg-gray-100 p-2 rounded-md w-32">{height}{unit}</p>
+                </div>
+               <Slider
+                 id="height"
+                 min={140}
+                 max={220}
+                 step={1}
+                 value={[height]}
+                 onValueChange={(value) => setHeight(value[0])}
+               />
+               <p className="text-center text-sm text-muted-foreground">Arraste para ajustar</p>
+             </div>
+             
+             {/* Simple weight slider for now */}
+             <div className="space-y-4">
+                <Label htmlFor="weight">Qual é o seu peso em kg?</Label>
+                <p className="text-2xl font-bold text-center bg-gray-100 p-2 rounded-md w-32 mx-auto">{weight}kg</p>
+                <Slider
+                    id="weight"
+                    min={40}
+                    max={150}
+                    step={1}
+                    value={[weight]}
+                    onValueChange={(value) => setWeight(value[0])}
+                />
+                 <p className="text-center text-sm text-muted-foreground">Arraste para ajustar</p>
+             </div>
+
+           </CardContent>
+           <CardFooter className="flex justify-between border-t pt-6">
+                <Button variant="outline" onClick={handleBack} disabled={currentQuestionIndex === 0}>
+                    <ArrowLeft />
+                    Anterior
+                </Button>
+                {currentQuestionIndex < quizData.length - 1 ? (
+                    <Button onClick={handleNext}>
+                    Próxima
+                    <ArrowRight />
+                    </Button>
+                ) : (
+                    <Button onClick={handleFinish} className="bg-red-600 hover:bg-red-700">
+                    Finalizar
+                    <Check />
+                    </Button>
+                )}
+            </CardFooter>
+        </Card>
+       </div>
+    );
+  }
+
 
   const renderOptions = () => {
     if (currentQuestion.layout === 'image-grid') {
