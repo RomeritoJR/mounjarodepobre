@@ -372,7 +372,7 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
           </CardHeader>
           <CardContent className="p-6 text-center space-y-4">
              {currentQuestion.videoEmbed && (
-              <div className="aspect-video">
+              <div className="relative w-full" style={{ paddingBottom: '177.78%' /* 9:16 Aspect Ratio */ }}>
                 <iframe
                   src={currentQuestion.videoEmbed}
                   title="vsl video"
@@ -380,7 +380,7 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
                   allowtransparency="true"
                   frameBorder="0"
                   scrolling="no"
-                  className="w-full h-full"
+                  className="absolute top-0 left-0 w-full h-full"
                   width="100%"
                   height="100%"
                 ></iframe>
