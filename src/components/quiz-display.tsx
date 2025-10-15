@@ -194,6 +194,18 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
             />
         </div>
       )}
+      
+      {currentQuestionIndex === 2 && (
+        <div className="my-4">
+            <Image
+                src="https://i.postimg.cc/63FqhwYF/Screenshot-4.png"
+                alt="Áreas do corpo"
+                width={600}
+                height={100}
+                className="rounded-lg mx-auto"
+            />
+        </div>
+      )}
 
 
       {renderHeaderText()}
