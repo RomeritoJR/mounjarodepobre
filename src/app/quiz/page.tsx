@@ -32,6 +32,23 @@ async function QuizGenerator() {
         isIntroQuestion: true,
       },
       {
+        question: 'SELECIONA SUA IDADE PARA CONTINUAR👇',
+        options: [
+          { text: '18 - 29 anos', image: 'https://i.postimg.cc/T1G1hN2w/image.png' },
+          { text: '29 - 39 anos', image: 'https://i.postimg.cc/k49g2Gg2/image.png' },
+          { text: '39 - 49 anos', image: 'https://i.postimg.cc/Y0z03gP9/image.png' },
+          { text: '+ 50 anos', image: 'https://i.postimg.cc/Y0z03gP9/image.png' },
+        ],
+        correctAnswer: '+ 50 anos', // Dummy
+        isIntroQuestion: true,
+        layout: 'image-grid',
+        headerText: {
+          timer: '🕒 Continua o diagnóstico GRATUITO em menos de 00:27',
+          title: 'PLANO ÚNICO E FLEXÍVEL PARA PERDER de 5 a 10 KG EM 21 DIAS COM INGREDIENTES NATURAIS E UMA FRUTA PODEROSA',
+          subtitle: 'Responda este questionário 🕒 rápido e receba seu plano perfeito mais a receita no final...',
+        }
+      },
+      {
         question: 'O que é o "Mounjaro de Pobre"?',
         options: ['Um remédio caro', 'Uma bebida natural para auxiliar no emagrecimento', 'Um tipo de exercício físico', 'Uma dieta da moda'],
         correctAnswer: 'Uma bebida natural para auxiliar no emagrecimento',
