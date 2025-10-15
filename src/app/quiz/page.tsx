@@ -45,7 +45,7 @@ async function QuizGenerator() {
 
     return <QuizDisplay quizData={quiz} />;
   } catch (error) {
-    console.error(error);
+    // console.error(error); - Removed to prevent Next.js error overlay
     return (
       <Card className="w-full max-w-lg text-center">
         <CardHeader>
