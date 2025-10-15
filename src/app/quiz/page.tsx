@@ -160,35 +160,15 @@ async function QuizGenerator() {
         options: [],
         correctAnswer: '',
       },
-      {
-        question: 'Qual destes é um pilar para o emagrecimento saudável e sustentável?',
-        options: ['Fazer dietas extremamente restritivas', 'Apenas tomar a bebida', 'Equilíbrio entre alimentação, exercício e descanso', 'Pular o café da manhã'],
-        correctAnswer: 'Equilíbrio entre alimentação, exercício e descanso',
-      },
-      {
-        question: 'Por que o sono é importante para quem quer emagrecer?',
-        options: ['Porque durante o sono não comemos', 'Ajuda na regulação de hormônios como cortisol e grelina', 'Não afeta o emagrecimento', 'Aumenta o estresse'],
-        correctAnswer: 'Ajuda na regulação de hormônios como cortisol e grelina',
-      },
-      {
-        question: 'Qual o papel das fibras na alimentação?',
-        options: ['Aumentar o apetite', 'Engordar rapidamente', 'Ajudar na digestão e promover saciedade', 'Não possuem função'],
-        correctAnswer: 'Ajudar na digestão e promover saciedade',
-      },
-      {
-        question: 'O que significa "déficit calórico"?',
-        options: ['Consumir mais calorias do que gasta', 'Não contar calorias', 'Consumir menos calorias do que o corpo gasta', 'Consumir apenas calorias de proteínas'],
-        correctAnswer: 'Consumir menos calorias do que o corpo gasta',
-      },
-      {
-        question: 'Beber o "Mounjaro de Pobre" substitui a necessidade de exercícios físicos?',
-        options: ['Sim, completamente', 'Não, é um auxiliar e deve ser combinado com hábitos saudáveis', 'Sim, mas só por uma semana', 'Depende do seu peso'],
-        correctAnswer: 'Não, é um auxiliar e deve ser combinado com hábitos saudáveis',
-      },
-      {
-        question: 'Qual o maior erro que as pessoas cometem ao tentar emagrecer?',
-        options: ['Beber muita água', 'Procurar soluções rápidas e milagrosas sem mudar o estilo de vida', 'Comer frutas', 'Dormir 8 horas por noite'],
-        correctAnswer: 'Procurar soluções rápidas e milagrosas sem mudar o estilo de vida',
+       {
+        isFinalStep: true,
+        infoTitle: 'Parabéns! Seu Protocolo Personalizado de emagrecimento com o Mounjaro de Pobre está pronto!',
+        infoBody: 'Assista o breve video abaixo para liberar SEU protocolo e entender como funciona👇',
+        videoEmbed: '<div class="wistia_responsive_padding" style="padding:178.33% 0 0 0;position:relative;"><div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;"><iframe src="https://fast.wistia.net/embed/iframe/xl5k0fj643?web_component=true&seo=true" title="vsl Video" allow="autoplay; fullscreen" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" width="100%" height="100%"></iframe></div></div><script src="https://fast.wistia.net/player.js" async></script>',
+        finalMessage: 'Esse protocolo é exclusivo SEU e gerado apenas uma vez, então por favor <strong>NÃO saia da página para não perdê-lo</strong>',
+        question: '',
+        options: [],
+        correctAnswer: '',
       },
     ],
   };

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import type { GenerateMounjaroQuizOutput } from '@/app/api/ai/generate-mounjaro-quiz';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -23,9 +23,12 @@ type QuizQuestion = Omit<GenerateMounjaroQuizOutput['quiz'][0], 'options'> & {
   isInfoStep?: boolean;
   isBmiCalculator?: boolean;
   isBmiResult?: boolean;
+  isFinalStep?: boolean;
   image?: string;
   infoTitle?: string;
   infoBody?: string;
+  videoEmbed?: string;
+  finalMessage?: string;
   buttonText?: string;
   carouselImages?: string[];
   options: Option[];
@@ -49,6 +52,20 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
   const [weight, setWeight] = useState(70);
   const [unit, setUnit] = useState('cm');
   const router = useRouter();
+
+  useEffect(() => {
+    // Wistia script handling for the final step
+    if (quizData[currentQuestionIndex]?.isFinalStep) {
+        const script = document.createElement('script');
+        script.src = 'https://fast.wistia.net/player.js';
+        script.async = true;
+        document.body.appendChild(script);
+
+        return () => {
+            document.body.removeChild(script);
+        };
+    }
+  }, [currentQuestionIndex, quizData]);
 
   const currentQuestion = quizData[currentQuestionIndex];
   const progressValue = ((currentQuestionIndex) / quizData.length) * 100;
@@ -92,11 +109,11 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
   const handleFinish = () => {
     const correctAnswersCount = quizData.reduce((count, question, index) => {
       // Don't score the intro, info, or bmi questions
-      if (question.isIntroQuestion || question.isInfoStep || question.isBmiCalculator || question.isBmiResult) return count;
+      if (question.isIntroQuestion || question.isInfoStep || question.isBmiCalculator || question.isBmiResult || question.isFinalStep) return count;
       return answers[index] === question.correctAnswer ? count + 1 : count;
     }, 0);
     
-    const totalScorableQuestions = quizData.filter(q => !q.isIntroQuestion && !q.isInfoStep && !q.isBmiCalculator && !q.isBmiResult).length;
+    const totalScorableQuestions = quizData.filter(q => !q.isIntroQuestion && !q.isInfoStep && !q.isBmiCalculator && !q.isBmiResult && !q.isFinalStep).length;
 
     router.push(`/results?correct=${correctAnswersCount}&total=${totalScorableQuestions}`);
   };
@@ -111,6 +128,32 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
         </div>
         <h2 className="text-2xl font-bold uppercase" dangerouslySetInnerHTML={{ __html: currentQuestion.headerText.title.replace(/(\\d+ a \\d+ KG EM \\d+ DIAS)/, '<span class="text-yellow-500">$1</span>') }}></h2>
         <p className="text-gray-600">{currentQuestion.headerText.subtitle}</p>
+      </div>
+    )
+  }
+  
+  if (currentQuestion.isFinalStep) {
+    return (
+      <div className="w-full max-w-2xl space-y-4">
+        <Card>
+          <CardHeader>
+            {currentQuestion.infoTitle && (
+              <CardTitle className="text-2xl font-bold text-center text-green-600" dangerouslySetInnerHTML={{ __html: currentQuestion.infoTitle }} />
+            )}
+            {currentQuestion.infoBody && (
+                <CardDescription className="text-center" dangerouslySetInnerHTML={{ __html: currentQuestion.infoBody }} />
+            )}
+          </CardHeader>
+          <CardContent className="p-6 text-center space-y-4">
+            {currentQuestion.videoEmbed && (
+              <div dangerouslySetInnerHTML={{ __html: currentQuestion.videoEmbed }} />
+            )}
+            {currentQuestion.finalMessage && (
+                <p className="text-center font-semibold mt-4" dangerouslySetInnerHTML={{ __html: currentQuestion.finalMessage}} />
+            )}
+          </CardContent>
+          {/* No footer on final step */}
+        </Card>
       </div>
     )
   }
@@ -159,9 +202,9 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
             )}
           </CardContent>
           <CardFooter className="flex justify-center">
-            <Button onClick={handleNext}>
+            <Button onClick={currentQuestionIndex < quizData.length - 1 ? handleNext : handleFinish}>
               {currentQuestion.buttonText || 'Continuar'}
-              <ArrowRight />
+              {currentQuestionIndex < quizData.length - 1 ? <ArrowRight /> : <Check /> }
             </Button>
           </CardFooter>
         </Card>
