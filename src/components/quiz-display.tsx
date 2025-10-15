@@ -145,10 +145,7 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
   }
   
   if (currentQuestion.isFinalStep) {
-    const videoEmbedHtml = currentQuestion.videoEmbed?.replace(
-        '<iframe src="https://fast.wistia.net/embed/iframe/xl5k0fj643?web_component=true&seo=true"',
-        '<div class="wistia_embed wistia_async_xl5k0fj643 seo=true web_component=true" style="height:100%;position:relative;width:100%">&nbsp;</div>'
-      ).replace('</iframe>', '');
+    const videoEmbedHtml = currentQuestion.videoEmbed;
       
     return (
       <div className="w-full max-w-2xl space-y-4">
@@ -570,5 +567,3 @@ export default function QuizDisplay({ quizData }: QuizDisplayProps) {
     </div>
   );
 }
-
-    
